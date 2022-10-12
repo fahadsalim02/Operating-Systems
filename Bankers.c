@@ -63,7 +63,16 @@ for(i=0;i<n;i++)
 
     }
 
-//3.calculating need matrix
+
+//3.available matrix
+    int avail[m];
+    for(i=0;i<m;i++)
+    {
+        printf("Number of Resource[%d] available :",i+1);
+        scanf("%d",&avail[i]);
+    }
+
+//4.calculating need matrix
 printf("need matrix\n");
 
 int need[n][m];
@@ -75,11 +84,61 @@ for(i=0;i<n;i++)
         }
         printf("\n");
     }
+//5.Intializing flag array to check completion
 
+   int completed[n];
+    for(i=0;i<n;i++)
+    {
+        completed[i]=0;
+    }
 
+//6.Checking if need > available and finding out the safe sequence
+    int k,sequence[n],index=0;
+    for(j=0;j<n;j++)
+    {
+        for(i=0;i<n;i++)
+        {
+            if(completed[i]==0)
+            {
+                int flag=0;
+                for(k=0;k<m;k++)
+                {
+                    if(need[i][k]>avail[k])
+                        flag=1;break;
+                }
 
+            if(flag==0)
+            {
+                sequence[index++]=i;
+                for(k=0;k<m;k++)
+                {
+                    avail[k]+=alloc[i][k];
+                    completed[i]=1;
+                }
+            }
 
+            }
+        }
+    }
+    int flag = 1;
 
+  for( i=0;i<n;i++)
+  {
+  if(completed[i]==0)
+  {
+    flag=0;
+    printf("The following system is not safe");
+    break;
+  }
+  }
+
+  if(flag==1)
+  {
+  printf("Following is the SAFE Sequence\n");
+  for (i = 0; i < n - 1; i++)
+  printf(" P%d ->", sequence[i]);
+  printf(" P%d", sequence[n - 1]);
+}
 
 
 }
