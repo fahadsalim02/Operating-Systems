@@ -6,7 +6,7 @@ int main()
     printf("Enter the length of the reference string :");
     scanf("%d",&n);
 
-    printf("Enter the reference string : ");
+    printf("Enter the string : ");
     int i,j,k,rs[n];
     for(i=0;i<n;i++)
     {
